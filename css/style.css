@@ -13,10 +13,24 @@
 body {
   font-size: 16px;
   font-family: "Merriweather", serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100vh;
 }
 
 body nav {
-  margin: 30px 30px 20px 30px;
+  padding: 30px 20px 20px 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -30,6 +44,7 @@ body nav {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 100%;
 }
 
 body nav .logo {
@@ -43,6 +58,9 @@ body nav .logo {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 body nav .logo .img-logo {
@@ -125,6 +143,19 @@ body nav .nav-fluid a:hover {
   border: 1px solid white;
 }
 
+body .intro {
+  color: white;
+  background-color: #467302;
+  text-align: center;
+  padding: 60px 25px;
+}
+
+body .intro h1 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: 900;
+}
+
 body .search {
   position: relative;
   display: -webkit-box;
@@ -141,6 +172,7 @@ body .search {
       -ms-flex-align: center;
           align-items: center;
   height: 250px;
+  width: 100%;
 }
 
 body .search .search-background {
@@ -154,14 +186,19 @@ body .search .search-background {
   z-index: -1;
 }
 
+body .search form {
+  position: relative;
+}
+
 body .search form .key-input {
-  width: 200px;
-  height: 30px;
+  width: 270px;
+  height: 40px;
   background-color: white;
   border-radius: 20px;
   outline: none;
-  padding: 15px;
+  padding: 20px;
   border: none;
+  font-size: 16px;
 }
 
 body .search form .key-input::-webkit-input-placeholder {
@@ -181,32 +218,69 @@ body .search form .key-input::placeholder {
 }
 
 body .search form button {
-  width: 80px;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 15px;
+  top: 12px;
   outline: none;
-  height: 30px;
-  border-radius: 20px;
-  border-color: #D97904;
-  background-color: #F2B705;
-  color: white;
-  cursor: pointer;
 }
 
-body .search .random-btn {
-  margin-top: 30px;
-  width: 80px;
-  position: absolute;
+body .search form button i {
+  color: #949393;
+  font-size: 1rem;
+}
+
+body .random-wrapper {
+  color: white;
+  background-color: #467302;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  margin-top: 100px;
+  padding: 50px 30px;
+  width: 300px;
+  -webkit-box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.1);
+}
+
+body .random-wrapper h1 {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+body .random-wrapper p {
+  margin: 20px 0 35px 0;
+}
+
+body .random-wrapper .random-btn {
+  width: 120px;
   bottom: 40px;
   outline: none;
-  height: 30px;
+  height: 40px;
   border-radius: 20px;
   border-color: #D97904;
   background-color: #F2B705;
   color: white;
   cursor: pointer;
+  font-size: 16px;
 }
 
 body main {
-  margin: 50px 40px;
+  padding: 50px 40px;
 }
 
 body main .buttons {
@@ -269,6 +343,7 @@ body main .filter-result {
 body main .filter-result .card {
   width: 200px;
   height: 300px;
+  cursor: pointer;
   background-color: gray;
   border-radius: 15px;
   background-color: white;
@@ -306,5 +381,106 @@ body main .filter-result .card .menu-name {
 
 body main .filter-result.inactive {
   visibility: hidden;
+}
+
+body .modal-wrapper {
+  width: 100%;
+  height: calc(100vh + 490px);
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 60px 25px 60px 20px;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 1;
+  position: absolute;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+body .modal-wrapper .modal {
+  background-color: white;
+  color: #467302;
+  border: 1px solid #467302;
+  -webkit-box-shadow: 4px 4px 0 2px #467302;
+          box-shadow: 4px 4px 0 2px #467302;
+  border-radius: 10px;
+  width: 300px;
+  padding: 160px 30px 50px 30px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body .modal-wrapper .modal .modal-close {
+  width: 120px;
+  bottom: 40px;
+  outline: none;
+  height: 40px;
+  border-radius: 20px;
+  border-color: #D97904;
+  background-color: #F2B705;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+body .modal-wrapper .modal .image-wrapper {
+  width: 220px;
+  left: 40px;
+  height: 180px;
+  border-radius: 10px;
+  background: url(../images/bubur.jpg) no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: -35px;
+  border: 1px solid #467302;
+}
+
+body .modal-wrapper .modal h3 {
+  text-align: center;
+}
+
+body .modal-wrapper .modal h4 {
+  margin-bottom: 15px;
+  text-decoration: underline;
+}
+
+body .modal-wrapper .modal .ingredients {
+  margin: 40px 0 35px 0;
+  width: 100%;
+}
+
+body .modal-wrapper .modal .ingredients ol {
+  padding-left: 20px;
+}
+
+body .modal-wrapper .modal .steps {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+body .modal-wrapper.active {
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
 }
 /*# sourceMappingURL=style.css.map */

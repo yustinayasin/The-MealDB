@@ -12,6 +12,8 @@ const categoryBtn = document.querySelector('.category-btn');
 const areaBtn = document.querySelector('.area-btn');
 const ingredientBtn = document.querySelector('.ingredient-btn');
 const menus = document.querySelectorAll('.menu');
+const body = document.querySelector('body');
+const modalWrapper = document.querySelector('.modal-wrapper');
 
 
 // toggle menu
@@ -19,7 +21,7 @@ menuHam.addEventListener('click', toggleMenu);
 menuClose.addEventListener('click', toggleMenu);
 
 
-document.addEventListener('click', function(e) {
+document.addEventListener('click', async function(e) {
     try {
         // filter category button
         if(e.target.classList.contains('btn-filter')){
@@ -38,7 +40,15 @@ document.addEventListener('click', function(e) {
             } else {
                 showFilter("i=",e.target.innerHTML);
             }
-            
+        }
+
+        if(e.target.classList.contains('card')){
+            await getMealDetail(e.target.dataset.idmeal);
+            modalWrapper.classList.add('active');
+        }
+
+        if(e.target.classList.contains('modal-close')) {
+            modalWrapper.classList.remove('active');
         }
 
     } catch(err) {
@@ -100,7 +110,7 @@ function toggleActive(e) {
 }
 
 function showCards(meal) {
-    return `<div class="card">
+    return `<div class="card" data-idMeal="${meal.idMeal}">
                 <div class="image-wrapper" style="background: url(${meal.strMealThumb}) no-repeat; background-size: cover;"></div>
                 <div class="menu-name">${meal.strMeal}</div>
             </div>`;
@@ -108,6 +118,46 @@ function showCards(meal) {
 
 function showButtons(name) {
     return `<button class="btn-filter">${name}</button>`;
+}
+
+function showMealDetail(meal) {
+    // console.log(meal);
+    let ingredients = [];
+    let list = '';
+    let i = 1;
+
+    while(i<=20){
+        if(meal[0][`strIngredient`+i] === "") {
+            i = 21;
+        } else {
+            ingredients.push([meal[0][`strIngredient`+i], meal[0][`strMeasure`+i]])
+        }
+        i++;
+    }
+
+    console.log(ingredients);
+
+    ingredients.forEach((ingredient) => {
+        list += `<li>${ingredient[1]} ${ingredient[0]}</li>`
+    });
+
+    console.log(list);
+
+    return `<div class="modal">
+                <div class="image-wrapper" style="background: url(${meal[0].strMealThumb}) no-repeat; background-size: cover;"></div>
+                <h3 class="menu-name">${meal[0].strMeal}</h3>
+                <div class="ingredients">
+                    <h4>Ingredients:</h4>
+                    <ol start="1">`
+                        +list+
+                    `</ol>
+                </div>
+                <div class="steps">
+                    <h4>Step by step:</h4>
+                    <p>${meal[0].strInstructions}</p>
+                </div>
+                <button class="modal-close">Close</button>
+            </div>`;
 }
 
 function toggleMenu() {
@@ -120,36 +170,60 @@ function toggleMenu() {
 function searchMeal(inputValue) {
     return  fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inputValue}`, {
                 method: 'POST'
-            }).then(response => response.json())
+            }).then(response => {
+                if(!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            })
             .then(response => {
+                if(response.Response === 'False') {
+                    throw new Error(response.Error);
+                }
                 const meals = response.meals;
                 //console.log(meals);
                 let cards = '';
                 meals.forEach(meal => {
                     cards += showCards(meal);
                 });
-                filterResults.innerHTML = cards;
+                return filterResults.innerHTML = cards;
             });
 }
 
 function randomMeal() {
     return fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
-            .then(response => response.json())
             .then(response => {
+                if(!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(response => {
+                if(response.Response === 'False') {
+                    throw new Error(response.Error);
+                }
                 const meals = response.meals;
                 //console.log(meals);
                 let cards = '';
                 meals.forEach(meal => {
                     cards += showCards(meal);
                 });
-                filterResults.innerHTML = cards;
+                return filterResults.innerHTML = cards;
             });
 }
 
 function getButtons(link) {
     return fetch(`https://www.themealdb.com/api/json/v1/1/list.php?${link}`)
-            .then(response => response.json())
             .then(response => {
+                if(!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(response => {
+                if(response.Response === 'False') {
+                    throw new Error(response.Error);
+                }
                 let filters = [];
                 let buttons = '';
                 const lists = response.meals;
@@ -167,15 +241,23 @@ function getButtons(link) {
                     buttons += showButtons(ctg);
                 });
 
-                buttonsWrapper.innerHTML = buttons;
+                return buttonsWrapper.innerHTML = buttons;
             });
 }
 
 
 function showFilter(link, filter) {
     return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?${link}${filter}`)
-            .then(response => response.json())
             .then(response => {
+                if(!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(response => {
+                if(response.Response === 'False') {
+                    throw new Error(response.Error);
+                }
                 let meals = response.meals;
                 let cards = '';
                 meals.forEach((meal) => {
@@ -184,4 +266,21 @@ function showFilter(link, filter) {
 
                 filterResults.innerHTML = cards;
             });
+}
+
+function getMealDetail(id) {
+    return fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+            .then(response => {
+                if(!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(response => {
+                if(response.Response === 'False') {
+                    throw new Error(response.Error);
+                }
+                const meal = response.meals;
+                modalWrapper.innerHTML = showMealDetail(meal);
+            })
 }
