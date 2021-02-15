@@ -1,0 +1,310 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap");
+*, ::after, ::before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+:root {
+  font-size: 16px;
+}
+
+body {
+  font-size: 16px;
+  font-family: "Merriweather", serif;
+}
+
+body nav {
+  margin: 30px 30px 20px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body nav .logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body nav .logo .img-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+
+body nav .logo .brand-name {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #D97904;
+}
+
+body nav .menu-ham {
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #467302;
+}
+
+body nav .menu-close {
+  font-size: 2em;
+  display: none;
+  color: #467302;
+  cursor: pointer;
+}
+
+body nav .menu-ham.active {
+  display: none;
+}
+
+body nav .menu-close.active {
+  display: block;
+}
+
+body nav .nav-fluid.active {
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+}
+
+body nav .nav-fluid {
+  position: fixed;
+  background-color: #467302;
+  width: 100%;
+  height: 90%;
+  left: 0;
+  top: 4.5rem;
+  z-index: 3;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  padding: 50px 40px 250px 40px;
+}
+
+body nav .nav-fluid a {
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px transparent;
+}
+
+body nav .nav-fluid a:hover {
+  border: 1px solid white;
+}
+
+body .search {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 250px;
+}
+
+body .search .search-background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background: url(../images/background.jpg) no-repeat;
+  background-size: cover;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+body .search form .key-input {
+  width: 200px;
+  height: 30px;
+  background-color: white;
+  border-radius: 20px;
+  outline: none;
+  padding: 15px;
+  border: none;
+}
+
+body .search form .key-input::-webkit-input-placeholder {
+  color: #949393;
+}
+
+body .search form .key-input:-ms-input-placeholder {
+  color: #949393;
+}
+
+body .search form .key-input::-ms-input-placeholder {
+  color: #949393;
+}
+
+body .search form .key-input::placeholder {
+  color: #949393;
+}
+
+body .search form button {
+  width: 80px;
+  outline: none;
+  height: 30px;
+  border-radius: 20px;
+  border-color: #D97904;
+  background-color: #F2B705;
+  color: white;
+  cursor: pointer;
+}
+
+body .search .random-btn {
+  margin-top: 30px;
+  width: 80px;
+  position: absolute;
+  bottom: 40px;
+  outline: none;
+  height: 30px;
+  border-radius: 20px;
+  border-color: #D97904;
+  background-color: #F2B705;
+  color: white;
+  cursor: pointer;
+}
+
+body main {
+  margin: 50px 40px;
+}
+
+body main .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  visibility: hidden;
+  position: absolute;
+}
+
+body main .buttons .btn-filter {
+  padding: 5px 15px;
+  border-style: outset;
+  background-color: #F2B705;
+  border-color: #D97904;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  border-radius: 20px;
+  margin: 5px;
+}
+
+body main .buttons .btn-filter:active {
+  border-style: inset;
+}
+
+body main .buttons .btn-filter.active {
+  color: #D97904;
+  background-color: white;
+}
+
+body main .buttons.active {
+  position: relative;
+  visibility: visible;
+}
+
+body main .filter-result {
+  display: -ms-grid;
+  display: grid;
+  gap: 40px 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+  margin-top: 40px;
+  visibility: visible;
+}
+
+body main .filter-result .card {
+  width: 200px;
+  height: 300px;
+  background-color: gray;
+  border-radius: 15px;
+  background-color: white;
+  border: 1px solid #467302;
+  -webkit-box-shadow: 4px 4px 0 0 #467302;
+          box-shadow: 4px 4px 0 0 #467302;
+  padding: 30px 15px;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "meal-image" "meal-name";
+  gap: 15px 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body main .filter-result .card .image-wrapper {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: meal-image;
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  background: url(../images/dumplings.jpg) no-repeat;
+  background-size: cover;
+}
+
+body main .filter-result .card .menu-name {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: meal-name;
+  text-align: center;
+  color: #467302;
+}
+
+body main .filter-result.inactive {
+  visibility: hidden;
+}
+/*# sourceMappingURL=style.css.map */
