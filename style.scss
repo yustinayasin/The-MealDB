@@ -26,6 +26,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    overflow: auto;
 
     nav {
         padding: 30px 20px 20px 20px;
@@ -306,26 +307,25 @@ body {
 
     .modal-wrapper {
         width: 100%;
-        height: calc(100vh + 490px);
         background-color: rgba($color: #000000, $alpha: 0.8);
-        padding: 60px 25px 60px 20px;
+        padding: 100px 25px 70px 20px;
         top: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 1;
-        position: absolute;
+        position: absolute !important;
         transform: translateX(-100%);
         transition: 1s ease;
+        height: 1000px;
+        overflow-y: auto;
 
         .modal {
             background-color: white;
             color: $green;
-            border: 1px solid $green;
-            box-shadow: 4px 4px 0 2px $green;
             border-radius: 10px;
             width: 300px;
-            padding: 160px 30px 50px 30px;
+            padding: 160px 0px 50px 0px;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -343,6 +343,7 @@ body {
                 color: white;
                 cursor: pointer;
                 font-size: 16px;
+                margin-top: 30px;
             }
 
     
@@ -355,30 +356,46 @@ body {
                 background-size: cover;
                 position: absolute;
                 top: -35px;
-                border: 1px solid $green;
+                border: 1px solid rgb(170, 169, 169);
             }
     
             h3 {
                 text-align: center;
             }
-    
-            h4 {
-                margin-bottom: 15px;
-                text-decoration: underline;
-            }
-    
-            .ingredients {
-                margin: 40px 0 35px 0;
+
+            .separator {
+                height: 2px;
                 width: 100%;
-    
-                ol {
-                    padding-left: 20px;
-                }
+                background-color: rgb(170, 169, 169);
             }
 
-            .steps {
-                width: 100%;
-                margin-bottom: 30px;
+            .line-top {
+                margin-top: 30px;
+            }
+
+            .modal-content {
+                font-size: 15px;
+                padding: 30px 10px 30px 30px;
+                height: 550px;
+                overflow-y: scroll;
+
+                h4 {
+                    margin-bottom: 15px;
+                    text-decoration: underline;
+                }
+
+                .ingredients {
+                    margin: 0 0 35px 0;
+                    width: 100%;
+        
+                    ol {
+                        padding-left: 20px;
+                    }
+                }
+    
+                .steps {
+                    width: 100%;
+                }
             }
         }
     }

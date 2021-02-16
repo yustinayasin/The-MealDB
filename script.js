@@ -16,6 +16,7 @@ const body = document.querySelector('body');
 const modalWrapper = document.querySelector('.modal-wrapper');
 
 
+
 // toggle menu
 menuHam.addEventListener('click', toggleMenu);
 menuClose.addEventListener('click', toggleMenu);
@@ -44,10 +45,17 @@ document.addEventListener('click', async function(e) {
 
         if(e.target.classList.contains('card')){
             await getMealDetail(e.target.dataset.idmeal);
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${window.scrollY}px`;
             modalWrapper.classList.add('active');
+
         }
 
         if(e.target.classList.contains('modal-close')) {
+            const scrollY = document.body.style.top;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
             modalWrapper.classList.remove('active');
         }
 
@@ -146,16 +154,20 @@ function showMealDetail(meal) {
     return `<div class="modal">
                 <div class="image-wrapper" style="background: url(${meal[0].strMealThumb}) no-repeat; background-size: cover;"></div>
                 <h3 class="menu-name">${meal[0].strMeal}</h3>
-                <div class="ingredients">
-                    <h4>Ingredients:</h4>
-                    <ol start="1">`
-                        +list+
-                    `</ol>
+                <span class="separator line-top"></span>
+                <div class="modal-content">
+                    <div class="ingredients">
+                        <h4>Ingredients:</h4>
+                        <ol start="1">`
+                            +list+
+                        `</ol>
+                    </div>
+                    <div class="steps">
+                        <h4>Step by step:</h4>
+                        <p>${meal[0].strInstructions}</p>
+                    </div>
                 </div>
-                <div class="steps">
-                    <h4>Step by step:</h4>
-                    <p>${meal[0].strInstructions}</p>
-                </div>
+                <span class="separator line-bottom"></span>
                 <button class="modal-close">Close</button>
             </div>`;
 }
