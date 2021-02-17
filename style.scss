@@ -308,24 +308,26 @@ body {
     .modal-wrapper {
         width: 100%;
         background-color: rgba($color: #000000, $alpha: 0.8);
-        padding: 100px 25px 70px 20px;
+        padding: 60px 25px 50px 20px;
         top: 0;
+        left: 0;
+        margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 1;
-        position: absolute !important;
+        position: absolute;
         transform: translateX(-100%);
         transition: 1s ease;
-        height: 1000px;
-        overflow-y: auto;
+        min-height: 100vh;
+        overflow-y: scroll;
 
         .modal {
             background-color: white;
             color: $green;
             border-radius: 10px;
             width: 300px;
-            padding: 160px 0px 50px 0px;
+            padding: 160px 0px 30px 0px;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -375,8 +377,8 @@ body {
 
             .modal-content {
                 font-size: 15px;
-                padding: 30px 10px 30px 30px;
-                height: 550px;
+                padding: 30px 30px 30px 30px;
+                height: 250px;
                 overflow-y: scroll;
 
                 h4 {
