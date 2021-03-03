@@ -1,42 +1,23 @@
-const form = document.querySelector('form');
-const main = document.querySelector('main');
-const filterResults = document.querySelector('.filter-result');
-const randomBtn = document.querySelector('.random-btn');
-const menuHam = document.querySelector('.menu-ham');
-const menuClose = document.querySelector('.menu-close');
-const navFluid = document.querySelector('.nav-fluid');
-const navbar = document.querySelector('nav');
-const buttonsWrapper = document.querySelector('.buttons');
-const homeBtn = document.querySelector('.home-btn');
-const categoryBtn = document.querySelector('.category-btn');
-const areaBtn = document.querySelector('.area-btn');
-const ingredientBtn = document.querySelector('.ingredient-btn');
-const menus = document.querySelectorAll('.menu');
-const body = document.querySelector('body');
-const modalWrapper = document.querySelector('.modal-wrapper');
-
-
 
 // toggle menu
-menuHam.addEventListener('click', toggleMenu);
-menuClose.addEventListener('click', toggleMenu);
-
+$('.menu-ham').click(toggleMenu);
+$('.menu-close').click(toggleMenu);
 
 document.addEventListener('click', async function(e) {
     try {
         // filter category button
         if(e.target.classList.contains('btn-filter')){
-            const filterButtons = buttonsWrapper.querySelectorAll('.btn-filter');
-            filterButtons.forEach(filterButton => {
-                if(filterButton.classList.contains('active')){
-                    filterButton.classList.remove('active');
+            const filterButtons = $('.buttons > .btn-filter');
+            filterButtons.each((index, filterButton) => {
+                if($(filterButton).hasClass('active')){
+                    $(filterButton).removeClass('active');
                 }
             });
             e.target.classList.add('active');
 
-            if(categoryBtn.classList.contains('active')) {
+            if($('.category-btn').hasClass('active')) {
                 showFilter("c=",e.target.innerHTML);
-            } else if (areaBtn.classList.contains('active')){
+            } else if ($('.area-btn').hasClass('active')){
                 showFilter("a=",e.target.innerHTML);
             } else {
                 showFilter("i=",e.target.innerHTML);
@@ -47,7 +28,7 @@ document.addEventListener('click', async function(e) {
             await getMealDetail(e.target.dataset.idmeal);
             document.body.style.position = 'fixed';
             document.body.style.top = `-${window.scrollY}px`;
-            modalWrapper.classList.add('active');
+            $('.modal-wrapper').addClass('active');
 
         }
 
@@ -56,7 +37,7 @@ document.addEventListener('click', async function(e) {
             document.body.style.position = '';
             document.body.style.top = '';
             window.scrollTo(0, parseInt(scrollY || '0') * -1);
-            modalWrapper.classList.remove('active');
+            $('.modal-wrapper').removeClass('active');
         }
 
     } catch(err) {
@@ -65,31 +46,32 @@ document.addEventListener('click', async function(e) {
 });
 
 // home button
-homeBtn.addEventListener('click', () => {
-    buttonsWrapper.innerHTML = '';
-    filterResults.innerHTML = '';
+$('.home-btn').click( (e) => {
+    $('.buttons').html('');
+    $('.filter-result').html('');
+    toggleActive(e);
 });
 
 // get category filter button
-categoryBtn.addEventListener('click', (e) => {
+$('.category-btn').click( (e) => {
     toggleActive(e);
     getButtons("c=list");
 });
 
 // get area filter button
-areaBtn.addEventListener('click', (e) => {
+$('.area-btn').click( (e) => {
     toggleActive(e);
     getButtons("a=list");
 });
 
 // get ingredient filter button
-ingredientBtn.addEventListener('click', (e) => {
+$('.ingredient-btn').click( (e) => {
     toggleActive(e);
     getButtons("i=list");
 });
 
 // request post API search by name
-form.addEventListener('submit', (e) => {
+$('form').submit( (e) => {
     e.preventDefault();
     const formElements = document.querySelector('form').elements;
     const inputValue = formElements[0].value;
@@ -97,9 +79,9 @@ form.addEventListener('submit', (e) => {
 });
 
 // random button
-randomBtn.addEventListener('click', () => {
+$('.random-btn').click( () => {
     try {
-        buttonsWrapper.classList.remove('active');
+        $('.buttons').removeClass('active');
         randomMeal();
     } catch(err) {
         console.log(err);
@@ -107,14 +89,14 @@ randomBtn.addEventListener('click', () => {
 });
 
 function toggleActive(e) {
-    menus.forEach(menu => {
-        if(menu.classList.contains('active')){
-            menu.classList.remove('active');
+    $('.menu').each((index, menu) => {
+        if($(menu).hasClass('active')){
+            $(menu).removeClass('active');
         }
     });
     e.target.classList.add('active');
-    filterResults.innerHTML = '';
-    buttonsWrapper.classList.add('active');
+    $('.filter-result').html('');
+    $('.buttons').addClass('active');
 }
 
 function showCards(meal) {
@@ -135,7 +117,7 @@ function showMealDetail(meal) {
     let i = 1;
 
     while(i<=20){
-        if(meal[0][`strIngredient`+i] === "") {
+        if(meal[0][`strIngredient`+i] === "" || meal[0][`strIngredient`+i] === null) {
             i = 21;
         } else {
             ingredients.push([meal[0][`strIngredient`+i], meal[0][`strMeasure`+i]])
@@ -143,13 +125,9 @@ function showMealDetail(meal) {
         i++;
     }
 
-    console.log(ingredients);
-
     ingredients.forEach((ingredient) => {
         list += `<li>${ingredient[1]} ${ingredient[0]}</li>`
     });
-
-    console.log(list);
 
     return `<div class="modal">
                 <div class="image-wrapper" style="background: url(${meal[0].strMealThumb}) no-repeat; background-size: cover;"></div>
@@ -173,10 +151,10 @@ function showMealDetail(meal) {
 }
 
 function toggleMenu() {
-    menuClose.classList.toggle('active');
-    navFluid.classList.toggle('active');
-    navbar.classList.toggle('active');
-    menuHam.classList.toggle('active');
+    $('.menu-close').toggleClass('active');
+    $('.nav-fluid').toggleClass('active');
+    $('nav').toggleClass('active');
+    $('.menu-ham').toggleClass('active');
 }
 
 function searchMeal(inputValue) {
@@ -195,10 +173,17 @@ function searchMeal(inputValue) {
                 const meals = response.meals;
                 //console.log(meals);
                 let cards = '';
+                console.log(meals);
                 meals.forEach(meal => {
                     cards += showCards(meal);
                 });
-                return filterResults.innerHTML = cards;
+
+                //clear buttons filter
+                $('.buttons').html('');
+                
+
+                breakpointColumn(meals.length);
+                return $('.filter-result').html(cards);
             });
 }
 
@@ -220,7 +205,13 @@ function randomMeal() {
                 meals.forEach(meal => {
                     cards += showCards(meal);
                 });
-                return filterResults.innerHTML = cards;
+
+                //clean the filter results and buttons
+                $('.buttons').html('');
+                $('.filter-result').html('');
+
+                breakpointColumn(1);
+                return $('.filter-result').html(cards);
             });
 }
 
@@ -253,7 +244,8 @@ function getButtons(link) {
                     buttons += showButtons(ctg);
                 });
 
-                return buttonsWrapper.innerHTML = buttons;
+                $('.filter-result').html('');
+                return $('.buttons').html(buttons);
             });
 }
 
@@ -272,11 +264,13 @@ function showFilter(link, filter) {
                 }
                 let meals = response.meals;
                 let cards = '';
+
                 meals.forEach((meal) => {
                     cards += showCards(meal);
                 });
 
-                filterResults.innerHTML = cards;
+                breakpointColumn(meals.length);
+                $('.filter-result').html(cards);
             });
 }
 
@@ -293,6 +287,22 @@ function getMealDetail(id) {
                     throw new Error(response.Error);
                 }
                 const meal = response.meals;
-                modalWrapper.innerHTML = showMealDetail(meal);
+                $('.modal-wrapper').html(showMealDetail(meal));
             })
+}
+
+function breakpointColumn(count) {
+    if(window.screen.width <= 520 || $(window).width() <= 520 || $(document).width() <= 520 || count <= 1) {
+        $('.filter-result').css('grid-template-areas', '"column1"');
+        $('.filter-result').css('gap', '40px 0');
+    } else if( (window.screen.width > 520 && window.screen.width <= 730) || ($(window).width() > 520 && $(window).width() <= 730) || ($(document).width() > 520 && $(document).width() <= 730) || count == 2) {
+        $('.filter-result').css('grid-template-areas', '"column1 column2"');
+        $('.filter-result').css('gap', '40px');
+    } else if( (window.screen.width > 730 && window.screen.width <= 950) || ($(window).width() > 730 && $(window).width() <= 950 ) || ($(document).width() > 730 && $(document).width() <= 950) || count == 3) {
+        $('.filter-result').css('grid-template-areas', '"column1 column2 column3"');
+        $('.filter-result').css('gap', '50px');
+    } else {
+        $('.filter-result').css('grid-template-areas', '"column1 column2 column3 column4"');
+        $('.filter-result').css('gap', '70px');
+    }
 }

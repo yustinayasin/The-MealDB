@@ -7,7 +7,7 @@
     <script src="https://kit.fontawesome.com/4a95053431.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="images/icon.png">
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="jquery-3.5.1.min.js"></script>
 </head>
 <body>
     <nav>
@@ -18,26 +18,28 @@
         <i class="fas fa-bars menu-ham"></i>
         <i class="fas fa-times menu-close"></i>
         <div class="nav-fluid">
-            <a class="home-btn">Home</a>
+            <a class="home-btn menu active">Home</a>
             <a class="category-btn menu">Category</a>
             <a class="area-btn menu">Area</a>
             <a class="ingredient-btn menu">Ingredient</a>
         </div>
     </nav>
 
-    <div class="intro">
-        <h1>Discover New Recipes</h1>
-        <p>There are hundres of recipes witing to be cooked. Do you want something spicy, sweet, or made from lamb? Everything is available.</p>
-    </div>
-
-    <div class="search">
-        <div class="search-background"></div>
-        <form>
-            <input class="key-input" type="text" placeholder="Search food by name">
-            <button type="submit">
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
+    <div class="header">
+        <div class="intro">
+            <h1>Discover New Recipes</h1>
+            <p>There are hundres of recipes witing to be cooked. Do you want something spicy, sweet, or made from lamb? Everything is available.</p>
+        </div>
+    
+        <div class="search">
+            <div class="search-background"></div>
+            <form>
+                <input class="key-input" type="text" placeholder="Search food by name">
+                <button type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
     </div>
 
     <div class="random-wrapper">

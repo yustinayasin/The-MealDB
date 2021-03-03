@@ -1,0 +1,131 @@
+@import 'variables';
+@import 'mixins';
+
+nav {
+    padding: 30px 20px 30px 20px;
+    @include display-flex(space-between, center, row);
+    width: 100%;
+
+    .logo {
+        @include display-flex(center, center, row);
+
+        .img-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 5px;
+        }
+
+        .brand-name {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: $main-color;
+        }
+    }
+
+    .menu-ham {
+        font-size: 1.5em;
+        cursor: pointer;
+        color: $green;
+    }
+
+    .menu-close {
+        font-size: 2em;
+        display: none;
+        color: $green;
+        cursor: pointer;
+    }
+
+    .menu-ham.active {
+        display: none;
+    }
+
+    .menu-close.active {
+        display: block;
+    }
+
+    .nav-fluid.active {
+        transform: translateX(0%);
+    }
+
+    .nav-fluid {
+        position: fixed;
+        background-color: $green;
+        width: 100%;
+        height: 90%;
+        left: 0;
+        top: 6rem;
+        z-index: 3;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        transform: translateX(100%);
+        transition: 1s ease;
+        color: white;
+        @include display-flex(space-between, center, column);
+        text-align: center;
+        padding: 50px 40px 250px 40px;
+
+        a {
+            cursor: pointer;
+            padding: 10px 20px;
+            border: 1px solid $green;
+        }
+
+        a:hover {
+            border-color: white;
+        }
+    }
+}
+
+@include breakpoint(tablet) {
+    nav {
+        padding: 30px 40px;
+
+        .logo {
+            .img-logo {
+                width: 50px;
+                height: 50px;
+                margin-right: 10px;
+            }
+
+            .brand-name {
+                font-size: 1.5rem;
+            }
+        }
+
+        .menu-ham {
+            display: none;
+        }
+
+        .nav-fluid {
+            position: static;
+            background-color: white;
+            z-index: 1;
+            color: $green;
+            height: auto;
+            width: auto;
+            transform: none;
+            padding: 0;
+            @include display-flex(space-between, center, row);
+
+            a {
+                margin: 0 5px;
+                border-color: white;
+            }
+    
+            a:hover {
+                background-color: $green;
+                color: white;
+            }
+
+            a.active {
+                border-color: $green;
+            }
+        }
+    }
+}
+
+@include breakpoint(laptop) {
+    nav {
+        padding: 30px 80px;
+    }
+}

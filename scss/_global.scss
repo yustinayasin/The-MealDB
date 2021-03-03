@@ -1,0 +1,22 @@
+@import 'variables';
+@import 'mixins';
+
+*,
+::after,
+::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: $font-size-body;
+}
+
+body {
+    font-size: $font-size-body;
+    font-family: $font-family;
+    @include display-flex();
+    min-height: 100vh;
+    overflow: auto;
+}

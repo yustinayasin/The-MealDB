@@ -1,0 +1,117 @@
+@import 'variables';
+@import 'mixins';
+
+.header {
+    @include display-flex(center, center, column);
+
+    .intro {
+        color: white;
+        background-color: $green;
+        text-align: center;
+        padding: 60px 25px;
+        @include display-flex();
+    
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+    }
+    
+    .search {
+        position: relative;
+        @include display-flex();
+        height: 250px;
+        width: 100%;
+    
+        .search-background {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            background: url(../images/background.jpg) no-repeat;
+            background-size: cover;
+            opacity: 0.8;
+            z-index: -1;
+        }
+    
+        form {
+            position: relative;
+    
+            .key-input {
+                width: 270px;
+                height: 40px;
+                background-color: white;
+                border-radius: 20px;
+                outline: none;
+                padding: 20px;
+                border: none;
+                font-size: 16px;
+            }
+    
+            .key-input::placeholder {
+                color: rgb(148, 147, 147);
+            }
+    
+            button {
+                width: auto;
+                height: auto;
+                background-color: transparent;
+                border: none;
+                position: absolute;
+                right: 15px;
+                top: 12px;
+                outline: none;
+    
+                i {
+                    color: rgb(148, 147, 147);
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+@include breakpoint(phone) {
+    .header {
+        .intro {
+            padding: 60px 100px;
+        }
+    }
+}
+
+@include breakpoint(tablet) {
+    .header {
+        @include display-grid($gap: 0);
+        grid-template-columns: 1fr 1.5fr;
+        grid-template-areas: 'intro search';
+        margin: 20px 40px;
+        height: 400px;
+
+        .intro {
+            height: 100%;
+            grid-area: intro;
+            padding: 60px 25px;
+        }
+
+        .search {
+            grid-area: search;
+            height: 100%;
+        }
+    }
+}
+
+@include breakpoint(laptop) {
+    .header {
+        margin: 30px 80px;
+        height: 350px;
+
+        .intro {
+            padding: 60px 40px;
+        }
+
+        .search {
+            height: 100%;
+        }
+    }
+}

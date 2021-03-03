@@ -1,0 +1,35 @@
+@import 'variables';
+@import 'mixins';
+
+.random-wrapper {
+    color: white;
+    background-color: $green;
+    @include display-flex();
+    text-align: center;
+    margin-top: 100px;
+    padding: 50px 30px;
+    width: 300px;
+    box-shadow: 0 0 20px 10px rgba($color: #000000, $alpha: 0.1);
+
+    h1 {
+        font-size: 1.5rem;
+        font-weight: 900;
+    }
+
+    p {
+        margin: 20px 0 35px 0;
+    }
+
+    .random-btn {
+        width: 120px;
+        bottom: 40px;
+        outline: none;
+        height: 40px;
+        border-radius: 20px;
+        border-color: $main-color;
+        background-color: $light-orange;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+    }
+}
