@@ -2,7 +2,7 @@
 // toggle menu
 $('.menu-ham').click(toggleMenu);
 $('.menu-close').click(toggleMenu);
-
+console.log("aa");
 document.addEventListener('click', async function(e) {
     try {
         // filter category button
