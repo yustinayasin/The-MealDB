@@ -3,6 +3,7 @@
 $('.menu-ham').click(toggleMenu);
 $('.menu-close').click(toggleMenu);
 console.log("aa");
+console.log("bb");
 document.addEventListener('click', async function(e) {
     try {
         // filter category button
